@@ -21,7 +21,8 @@ public class Button_Forest_Manager : MonoBehaviour
   public int stoneCooldownLength = 1;
   public int rHuntCooldownLength = 1;
   public int mHuntCooldownLength = 1;
-  public int 
+  public int herbsCooldownLength = 1;
+  public int fishingCooldownLenth = 1;
 
   // set button colors wood
   private ColorBlock woodColorGreen;
@@ -39,11 +40,21 @@ public class Button_Forest_Manager : MonoBehaviour
   private ColorBlock mHuntColorGreen;
   private ColorBlock mHuntColorRed;
 
+  // set button colors for herbs
+  private ColorBlock herbsColorGreen;
+  private ColorBlock herbsColorRed;
+
+  // set button colors for fishing
+  private ColorBlock fishingColorGreen;
+  private ColorBlock fishingColorRed;
+
   // set cool down timers
   private float woodCooldownTimer = 0.0F;
   private float stoneCooldownTimer = 0.0F;
   private float rHuntCooldownTimer = 0.0F;
   private float mHuntCooldownTimer = 0.0F;
+  private float herbsCooldownTimer = 0.0F;
+  private float fishingCooldownTimer = 0.0F;
 
 
   // set cool down bools
@@ -51,6 +62,8 @@ public class Button_Forest_Manager : MonoBehaviour
   private bool stoneOffCooldown = true;
   private bool rHuntOffCooldown = true;
   private bool mHuntOffCooldown = true;
+  private bool herbsOffCooldown = true;
+  private bool fishingOffCooldown = true;
 
 	// Use this for initialization
 	void Start ()
@@ -60,67 +73,85 @@ public class Button_Forest_Manager : MonoBehaviour
     stoneCooldownTimer = Time.time;
     rHuntCooldownTimer = Time.time;
     mHuntCooldownTimer = Time.time;
+    herbsCooldownTimer = Time.time;
+    fishingCooldownTimer = Time.time;
+
+    if (true)
+    {
+      // set up wood button colors
+      woodButton = woodButton.GetComponent<Button>();
+      woodColorGreen = woodButton.GetComponent<Button>().colors;
+      woodColorRed = woodButton.GetComponent<Button>().colors;
+
+      // set wood green button colors
+      woodColorGreen.highlightedColor = Color.green;
+      woodColorGreen.normalColor = Color.green;
+      woodColorGreen.pressedColor = Color.green;
+
+      // set wood red button colors
+      woodColorRed.highlightedColor = Color.red;
+      woodColorRed.normalColor = Color.red;
+      woodColorRed.pressedColor = Color.red;
+
+      // set up stone button colors
+      stoneButton = stoneButton.GetComponent<Button>();
+      stoneColorGreen = stoneButton.GetComponent<Button>().colors;
+      stoneColorRed = stoneButton.GetComponent<Button>().colors;
+
+      // set stone green button colors
+      stoneColorGreen.highlightedColor = Color.green;
+      stoneColorGreen.normalColor = Color.green;
+      stoneColorGreen.pressedColor = Color.green;
+
+      // set stone red button colors
+      stoneColorRed.highlightedColor = Color.red;
+      stoneColorRed.normalColor = Color.red;
+      stoneColorRed.pressedColor = Color.red;
+
+      // set up rHunt button colors
+      rHuntButton = rHuntButton.GetComponent<Button>();
+      rHuntColorGreen = rHuntButton.GetComponent<Button>().colors;
+      rHuntColorRed = rHuntButton.GetComponent<Button>().colors;
+
+      // set rHunt green button colors
+      rHuntColorGreen.highlightedColor = Color.green;
+      rHuntColorGreen.normalColor = Color.green;
+      rHuntColorGreen.pressedColor = Color.green;
+
+      // set rHunt red button colors
+      rHuntColorRed.highlightedColor = Color.red;
+      rHuntColorRed.normalColor = Color.red;
+      rHuntColorRed.pressedColor = Color.red;
+
+      // set mHunt button colors
+      mHuntButton = mHuntButton.GetComponent<Button>();
+      mHuntColorGreen = mHuntButton.GetComponent<Button>().colors;
+      mHuntColorRed = mHuntButton.GetComponent<Button>().colors;
+
+      // set mHunt green button colors
+      mHuntColorGreen.highlightedColor = Color.green;
+      mHuntColorGreen.normalColor = Color.green;
+      mHuntColorGreen.pressedColor = Color.green;
+
+      // set mHunt red buttons colors
+      mHuntColorRed.highlightedColor = Color.red;
+      mHuntColorRed.normalColor = Color.red;
+      mHuntColorRed.pressedColor = Color.red;
+
+      // set herbs green button colors
+      herbsColorGreen.highlightedColor = Color.green;
+      herbsColorGreen.normalColor = Color.green;
+      herbsColorGreen.pressedColor = Color.green;
+
+      // set herbs red button colors
+      herbsColorRed.highlightedColor = Color.red;
+      herbsColorRed.normalColor = Color.red;
+      herbsColorRed.pressedColor = Color.red;
+
+      // set fishing green button colors
 
 
-  // set up wood button colors
-    woodButton = woodButton.GetComponent<Button>();
-    woodColorGreen = woodButton.GetComponent<Button>().colors;
-    woodColorRed = woodButton.GetComponent<Button>().colors;
-
-    // set wood green button colors
-    woodColorGreen.highlightedColor = Color.green;
-    woodColorGreen.normalColor = Color.green;
-    woodColorGreen.pressedColor = Color.green;
-
-    // set wood red button colors
-    woodColorRed.highlightedColor = Color.red;
-    woodColorRed.normalColor = Color.red;
-    woodColorRed.pressedColor = Color.red;
-
-  // set up stone button colors
-    stoneButton = stoneButton.GetComponent<Button>();
-    stoneColorGreen = stoneButton.GetComponent<Button>().colors;
-    stoneColorRed = stoneButton.GetComponent<Button>().colors;
-
-    // set stone green button colors
-    stoneColorGreen.highlightedColor = Color.green;
-    stoneColorGreen.normalColor = Color.green;
-    stoneColorGreen.pressedColor = Color.green;
-
-    // set stone red button colors
-    stoneColorRed.highlightedColor = Color.red;
-    stoneColorRed.normalColor = Color.red;
-    stoneColorRed.pressedColor = Color.red;
-
-  // set up rHunt button colors
-    rHuntButton = rHuntButton.GetComponent<Button>();
-    rHuntColorGreen = rHuntButton.GetComponent<Button>().colors;
-    rHuntColorRed = rHuntButton.GetComponent<Button>().colors;
-
-    // set rHunt green button colors
-    rHuntColorGreen.highlightedColor = Color.green;
-    rHuntColorGreen.normalColor = Color.green;
-    rHuntColorGreen.pressedColor = Color.green;
-
-    // set rHunt red button colors
-    rHuntColorRed.highlightedColor = Color.red;
-    rHuntColorRed.normalColor = Color.red;
-    rHuntColorRed.pressedColor = Color.red;
-
-  // set mHunt button colors
-    mHuntButton = mHuntButton.GetComponent<Button>();
-    mHuntColorGreen = mHuntButton.GetComponent<Button>().colors;
-    mHuntColorRed = mHuntButton.GetComponent<Button>().colors;
-
-    // set mHunt green button colors
-    mHuntColorGreen.highlightedColor = Color.green;
-    mHuntColorGreen.normalColor = Color.green;
-    mHuntColorGreen.pressedColor = Color.green;
-
-    // set mHunt red buttons colors
-    mHuntColorRed.highlightedColor = Color.red;
-    mHuntColorRed.normalColor = Color.red;
-    mHuntColorRed.pressedColor = Color.red;
+    } // end set colors
 
   } // end START
 
