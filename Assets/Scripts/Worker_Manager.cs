@@ -32,11 +32,16 @@ public class Worker_Manager : MonoBehaviour {
 
   public int workersMine;
 
+  public int totalWorkers;
+
   // Update is called once per frame
   void Update ()
   {
+    // find total workers
+    totalWorkers = workersIdle + workersWood + workersStone + workersRegularHunt + workersMonsterHunt
+      + workersFisher + workersHerb + workersMine;
     // set displays for each worker type
-    workersIdleDisplay.text = "Idle workers: " + workersIdle;
+    workersIdleDisplay.text = "Idle workers: " + workersIdle + " / " + totalWorkers;
 
     workerWoodDisplay.text = "Lumberjacks: " + workersWood;
     workerStoneDisplay.text = "Stone gatherer: " + workersStone;

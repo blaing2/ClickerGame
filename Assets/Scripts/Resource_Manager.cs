@@ -31,6 +31,8 @@ public class Resource_Manager : MonoBehaviour {
   public Text mScalesDisplay;
   public Text mMeatDisplay;
 
+  public Text relicDisplay;
+
   // set up variables
   public int wood = 0;
   public int stone = 0;
@@ -38,8 +40,7 @@ public class Resource_Manager : MonoBehaviour {
   public int bone = 0;
   public int teeth = 0;
   public int fur = 0;
-  public int meat = 0;
-  public int fish = 0;
+  public int food = 0;
   public int herb = 0;
 
   public int ironOre = 0;
@@ -52,8 +53,9 @@ public class Resource_Manager : MonoBehaviour {
   public int mBone = 0;
   public int mTeeth = 0;
   public int mPelt = 0;
-  public int mMeat = 0;
   public int mScale = 0;
+
+  public int relic = 0;
 
   // set cool downs
   private float autoCooldownTimer = 0.0F;
@@ -68,7 +70,7 @@ public class Resource_Manager : MonoBehaviour {
   public int furClickIncrease = 1;
   public int meatClickIncrease = 1;
   public int fishClickIncrease = 1;
-  public int herClickIncrease = 1;
+  public int herbClickIncrease = 1;
 
   public int ironOreClickIncrease = 1;
   public int coalClickIncrease = 1;
@@ -78,6 +80,8 @@ public class Resource_Manager : MonoBehaviour {
   public int mPeltClickIncrease = 1;
   public int mMeatClickIncrease = 1;
   public int mScaleClickIncrease = 1;
+
+  public int relicClickIncrease = 1;
 
   // temp set click upgrade --> move this to upgradeManager
   public int woodClickUpgradeMultiplier = 1;
@@ -98,7 +102,9 @@ public class Resource_Manager : MonoBehaviour {
   public int mPeltClickUpgradeMultiplier = 1;
   public int mMeatClickUpgradeMultiplier = 1;
   public int mScaleClickUpgradeMultiplier = 1;
-	
+
+  public int relicClickUpgradeMultiplier = 1;
+
 	// Update is called once per frame
 	void Update ()
   {
@@ -110,8 +116,8 @@ public class Resource_Manager : MonoBehaviour {
     boneDisplay.text = "Bone: " + bone;
     teethDisplay.text = "Teeth: " + teeth;
     furDisplay.text = "Fur: " + fur;
-    meatDisplay.text = "Meat: " + meat;
-    fishDisplay.text = "Fish: " + fish;
+    meatDisplay.text = "Food: " + food;
+
     herbDispaly.text = "Herb: " + herb;
 
     ironOreDisplay.text = "Iron Ore: " + ironOre;
@@ -124,8 +130,9 @@ public class Resource_Manager : MonoBehaviour {
     mBoneDisplay.text = "Monster Bone: " + mBone;
     mTeethDisplay.text = "Monster Teeth: " + mTeeth;
     mPeltDisplay.text = "Monster Pelt: " + mPelt;
-    mMeatDisplay.text = "Monster Meat: " + mMeat;
     mScalesDisplay.text = "Monster Scales: " + mScale;
+
+    relicDisplay.text = "Relics: " + relic;
 
     // set up call to other managers
     Worker_Manager workerManagerScript = workerManager.GetComponent<Worker_Manager>();
@@ -143,9 +150,9 @@ public class Resource_Manager : MonoBehaviour {
       bone += (boneClickIncrease * boneClickUpgradeMultiplier) * (workerManagerScript.workersRegularHunt);
       teeth += (teethClickIncrease * boneClickUpgradeMultiplier) * (workerManagerScript.workersRegularHunt);
       fur += (furClickIncrease * furClickUpgradeMultiplier) * (workerManagerScript.workersRegularHunt);
-      meat += (meatClickIncrease * meatClickUpgradeMultiplier) * (workerManagerScript.workersRegularHunt);
-      fish += (fishClickIncrease * fishClickUpgradeMultiplier) * (workerManagerScript.workersFisher);
-      herb += (herClickIncrease * herbClickUpgradeMultiplier) * (workerManagerScript.workersHerb);
+      food += (meatClickIncrease * meatClickUpgradeMultiplier) * (workerManagerScript.workersRegularHunt);
+      food += (fishClickIncrease * fishClickUpgradeMultiplier) * (workerManagerScript.workersFisher);
+      herb += (herbClickIncrease * herbClickUpgradeMultiplier) * (workerManagerScript.workersHerb);
 
       ironOre += (ironOreClickIncrease * ironOreClickUpgradeMultiplier) * (workerManagerScript.workersMine);
       coal += (coalClickIncrease * coalClickUpgradeMultiplier) * (workerManagerScript.workersMine);
@@ -154,8 +161,64 @@ public class Resource_Manager : MonoBehaviour {
       mBone += (mBoneClickIncrease * mBoneClickUpgradeMultiplier) * (workerManagerScript.workersMonsterHunt);
       mTeeth += (mTeethClickIncrease * mBoneClickUpgradeMultiplier) * (workerManagerScript.workersMonsterHunt);
       mPelt += (mPeltClickIncrease * mPeltClickUpgradeMultiplier) * (workerManagerScript.workersMonsterHunt);
-      mMeat += (mMeatClickIncrease * mMeatClickUpgradeMultiplier) * (workerManagerScript.workersMonsterHunt);
+      food += (mMeatClickIncrease * mMeatClickUpgradeMultiplier) * (workerManagerScript.workersMonsterHunt);
       mScale += (mScaleClickIncrease * mScaleClickUpgradeMultiplier) * (workerManagerScript.workersMonsterHunt);
+
+      food -= (workerManagerScript.workersWood + workerManagerScript.workersStone + workerManagerScript.workersRegularHunt
+        + workerManagerScript.workersHerb + workerManagerScript.workersMine + workerManagerScript.workersMonsterHunt
+        + workerManagerScript.workersFisher) * 2;
+
+      if (food < 0)
+      {
+        if (workerManagerScript.workersIdle > 3)
+        {
+          workerManagerScript.workersIdle -= 3;
+
+        }
+
+        else if (workerManagerScript.workersWood > 3)
+        {
+          workerManagerScript.workersWood -= 3;
+
+        }
+        
+        else if (workerManagerScript.workersStone > 3)
+        {
+          workerManagerScript.workersStone -= 3;
+
+        }
+
+        else if (workerManagerScript.workersRegularHunt > 3)
+        {
+          workerManagerScript.workersRegularHunt -= 3;
+
+        }
+
+        else if (workerManagerScript.workersHerb > 3)
+        {
+          workerManagerScript.workersHerb -= 3;
+
+        }
+
+        else if (workerManagerScript.workersMine > 3)
+        {
+          workerManagerScript.workersMine -= 3;
+
+        }
+
+        else if (workerManagerScript.workersMonsterHunt > 3)
+        {
+          workerManagerScript.workersMonsterHunt -= 3;
+          
+        }
+
+        else if (workerManagerScript.workersFisher > 3)
+        {
+          workerManagerScript.workersFisher -= 3;
+
+        }
+
+      }
 
     }
 

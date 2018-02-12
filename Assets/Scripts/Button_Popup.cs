@@ -33,7 +33,7 @@ public class Button_Popup : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
   {
     if (pointerOverBox)
     {
-      Vector2 mousePosition = new Vector2(Input.mousePosition.x + 100, Input.mousePosition.y - 25);
+      Vector2 mousePosition = new Vector2(Input.mousePosition.x + 220, Input.mousePosition.y - 25);
       textBox.transform.position = mousePosition;
       textBox.SetActive(true);
 

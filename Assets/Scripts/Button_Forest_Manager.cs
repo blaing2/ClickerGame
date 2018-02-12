@@ -7,6 +7,8 @@ public class Button_Forest_Manager : MonoBehaviour
 {
   // set resource manager object
   public GameObject resourceManager;
+  public GameObject workerManager;
+  public GameObject eventManager;
 
   // get buttons for color
   public Button woodButton;
@@ -24,7 +26,7 @@ public class Button_Forest_Manager : MonoBehaviour
   public int herbsCooldownLength = 1;
   public int fishingCooldownLenth = 1;
 
-  // set button colors wood
+  // set button colors for wood
   private ColorBlock woodColorGreen;
   private ColorBlock woodColorRed;
 
@@ -65,6 +67,8 @@ public class Button_Forest_Manager : MonoBehaviour
   private bool herbsOffCooldown = true;
   private bool fishingOffCooldown = true;
 
+  public int mHuntDeathMod = 0;
+
 	// Use this for initialization
 	void Start ()
   {
@@ -76,6 +80,7 @@ public class Button_Forest_Manager : MonoBehaviour
     herbsCooldownTimer = Time.time;
     fishingCooldownTimer = Time.time;
 
+    // set up button colors
     if (true)
     {
       // set up wood button colors
@@ -138,6 +143,11 @@ public class Button_Forest_Manager : MonoBehaviour
       mHuntColorRed.normalColor = Color.red;
       mHuntColorRed.pressedColor = Color.red;
 
+      // set herbs button colors
+      herbsButton = herbsButton.GetComponent<Button>();
+      herbsColorGreen = herbsButton.GetComponent<Button>().colors;
+      herbsColorRed = herbsButton.GetComponent<Button>().colors;
+
       // set herbs green button colors
       herbsColorGreen.highlightedColor = Color.green;
       herbsColorGreen.normalColor = Color.green;
@@ -148,10 +158,22 @@ public class Button_Forest_Manager : MonoBehaviour
       herbsColorRed.normalColor = Color.red;
       herbsColorRed.pressedColor = Color.red;
 
+      // set fishing button colors
+      fishingButton = fishingButton.GetComponent<Button>();
+      fishingColorGreen = fishingButton.GetComponent<Button>().colors;
+      fishingColorRed = fishingButton.GetComponent<Button>().colors;
+
       // set fishing green button colors
+      fishingColorGreen.highlightedColor = Color.green;
+      fishingColorGreen.normalColor= Color.green;
+      fishingColorGreen.pressedColor = Color.green;
 
+      // set fishing red button colors
+      fishingColorRed.highlightedColor = Color.red;
+      fishingColorRed.normalColor = Color.red;
+      fishingColorRed.pressedColor = Color.red;
 
-    } // end set colors
+    } // end SET COLORS
 
   } // end START
 
@@ -214,9 +236,40 @@ public class Button_Forest_Manager : MonoBehaviour
     {
       mHuntOffCooldown = false;
       mHuntButton.colors = mHuntColorRed;
+
     }
 
-	} // end UPDATE
+    // update herbs button color and bool
+    if (herbsCooldownTimer <= Time.time)
+    {
+      herbsOffCooldown = true;
+      herbsButton.colors = herbsColorGreen;
+
+    }
+
+    else
+    {
+      herbsOffCooldown = false;
+      herbsButton.colors = herbsColorRed;
+
+    }
+
+    // update fishing button color and bool
+    if (fishingCooldownTimer <= Time.time)
+    {
+      fishingOffCooldown = true;
+      fishingButton.colors = fishingColorGreen;
+
+    }
+
+    else
+    {
+      fishingOffCooldown = false;
+      fishingButton.colors = fishingColorRed;
+
+    }
+
+  } // end UPDATE
 
   public void _WoodClicker()
   {
@@ -264,18 +317,70 @@ public class Button_Forest_Manager : MonoBehaviour
   {
     // update the resource manager when the button is clicked
     Resource_Manager resourceManagerScript = resourceManager.GetComponent<Resource_Manager>();
+    Worker_Manager workerManagerScript = workerManager.GetComponent<Worker_Manager>();
+    Event_Manager_System eventManagerScript = eventManager.GetComponent<Event_Manager_System>();
 
     // if the button is off cooldown add time to cooldown then increase the resource count
     if (mHuntOffCooldown)
     {
-      mHuntCooldownTimer = Time.time + mHuntCooldownLength;
-      resourceManagerScript.mBone += resourceManagerScript.mBoneClickIncrease;
-      resourceManagerScript.mTeeth += resourceManagerScript.mTeethClickIncrease;
-      resourceManagerScript.mPelt += resourceManagerScript.mPeltClickIncrease;
-      resourceManagerScript.mMeat += resourceManagerScript.mMeatClickIncrease;
-      resourceManagerScript.mScale += resourceManagerScript.mScaleClickIncrease;
+      if (Random.Range(1, 10) + mHuntDeathMod + ((float)workerManagerScript.workersMonsterHunt / 2) <= 7)
+      {
+        if (workerManagerScript.workersMonsterHunt > 0)
+        {
+          workerManagerScript.workersMonsterHunt -= Random.Range(1, 3);
+
+          if (workerManagerScript.workersMonsterHunt < 0)
+          {
+            workerManagerScript.workersMonsterHunt = 0;
+          } // end setting the workers to 0 is they are lower
+
+        } // end REMOVE WORKER
+        eventManagerScript.mHuntCount += 1;
+
+      } // end CHECK IF HUNT SUCCESSFUL
+
+      else
+      {
+        mHuntCooldownTimer = Time.time + mHuntCooldownLength;
+        resourceManagerScript.mBone += resourceManagerScript.mBoneClickIncrease;
+        resourceManagerScript.mTeeth += resourceManagerScript.mTeethClickIncrease;
+        resourceManagerScript.mPelt += resourceManagerScript.mPeltClickIncrease;
+        resourceManagerScript.food += resourceManagerScript.mMeatClickIncrease;
+        resourceManagerScript.mScale += resourceManagerScript.mScaleClickIncrease;
+
+      } // end ELSE
 
     }
+
   } // end MHUNTCLICKER
+
+  public void _HerbsClicker()
+  {
+    // update the resource manager when the button is clicked
+    Resource_Manager resourceManagerScript = resourceManager.GetComponent<Resource_Manager>();
+
+    // if the button is off cooldown add time to the cooldown then increase the resource count
+    if (herbsOffCooldown)
+    {
+      herbsCooldownTimer = Time.time + herbsCooldownLength;
+      resourceManagerScript.herb += resourceManagerScript.herbClickIncrease;
+
+    }
+
+  } // end HERBSCLICKER
+
+  public void _FishingClicker()
+  {
+    // update the resource manager when the button is clicked
+    Resource_Manager resourceManagerScript = resourceManager.GetComponent<Resource_Manager>();
+
+    // if the button is off cooldown add time to the cooldown then increase the resource count
+    if (fishingOffCooldown)
+    {
+      fishingCooldownTimer = Time.time + fishingCooldownLenth;
+      resourceManagerScript.food += resourceManagerScript.fishClickIncrease;
+    }
+
+  } // end FISHINGCLICKER
 
 } // end CLASS
