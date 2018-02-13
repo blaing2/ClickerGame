@@ -2322,7 +2322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &414898530
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2354,18 +2354,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 264f7b42cbd4c374c8af95b2460623f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceManager: {fileID: 0}
+  housingButton: {fileID: 0}
+  mineStabilityButton: {fileID: 0}
+  axesButton: {fileID: 0}
+  pickaxesButton: {fileID: 0}
+  butcherKnifeButton: {fileID: 0}
+  bowButton: {fileID: 0}
+  skinningKnifeButton: {fileID: 0}
+  fishingPoleButton: {fileID: 0}
   housingDisplay: {fileID: 0}
   mineStablityDisplay: {fileID: 0}
   axeDisplay: {fileID: 0}
+  pickaxeDisplay: {fileID: 0}
   butcherDisplay: {fileID: 0}
   bowDisplay: {fileID: 0}
   skinningDisplay: {fileID: 0}
   fishingPoleDisplay: {fileID: 0}
-  mineStabilityDisplay: {fileID: 0}
-  pickAxeDisplay: {fileID: 0}
+  housingCostDisplay: {fileID: 0}
+  mineStabilityCostDisplay: {fileID: 0}
+  axeCostDisplay: {fileID: 0}
+  pickaseCostDisplay: {fileID: 0}
+  butcherCostDisplay: {fileID: 0}
+  bowCostDisplay: {fileID: 0}
+  skinningKnifeCostDisplay: {fileID: 0}
+  fishingPoleCostDisplay: {fileID: 0}
   upgradeCostMultiplier: 1.5
   housingLevel: 0
+  mineStablityLevel: 0
   axeLevel: 0
+  pickaxeLevel: 0
   butcherLevel: 0
   bowLevel: 0
   skinningLevel: 0
@@ -4573,7 +4591,7 @@ RectTransform:
   - {fileID: 1452184356}
   - {fileID: 1574524262}
   m_Father: {fileID: 926193024}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6748,7 +6766,7 @@ GameObject:
   - component: {fileID: 926164202}
   - component: {fileID: 926164201}
   m_Layer: 5
-  m_Name: GatherTime_Cost
+  m_Name: MineStability_Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6903,8 +6921,8 @@ RectTransform:
   - {fileID: 1505013192}
   - {fileID: 568017594}
   - {fileID: 414898530}
-  - {fileID: 663122683}
   - {fileID: 1524257929}
+  - {fileID: 663122683}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7455,8 +7473,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 1.2398, y: 0}
+  m_SizeDelta: {x: 190, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &955509911
 MonoBehaviour:
@@ -11998,6 +12016,19 @@ MonoBehaviour:
   mineStabilityUpgrade: {fileID: 558279746}
   pickaxeUpgrade: {fileID: 935046409}
   blacksmithBuild: {fileID: 92750042}
+  leatherResource: {fileID: 0}
+  herbResource: {fileID: 0}
+  RelicsResource: {fileID: 0}
+  tradingPostBuild: {fileID: 0}
+  wallBuild: {fileID: 0}
+  tanneryBuild: {fileID: 0}
+  ironForgeBuild: {fileID: 0}
+  trainingHutBuild: {fileID: 0}
+  smokeHouseBuild: {fileID: 0}
+  herbalistBuild: {fileID: 0}
+  enchanterBuild: {fileID: 0}
+  ritualTable: {fileID: 0}
+  chiefsHut: {fileID: 0}
 --- !u!4 &1503431127
 Transform:
   m_ObjectHideFlags: 0
@@ -12099,18 +12130,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 264f7b42cbd4c374c8af95b2460623f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  housingDisplay: {fileID: 0}
-  mineStablityDisplay: {fileID: 0}
-  axeDisplay: {fileID: 0}
-  butcherDisplay: {fileID: 0}
-  bowDisplay: {fileID: 0}
-  skinningDisplay: {fileID: 0}
-  fishingPoleDisplay: {fileID: 0}
-  mineStabilityDisplay: {fileID: 0}
-  pickAxeDisplay: {fileID: 0}
+  resourceManager: {fileID: 1787240807}
+  housingButton: {fileID: 831113671}
+  mineStabilityButton: {fileID: 558279748}
+  axesButton: {fileID: 846933546}
+  pickaxesButton: {fileID: 935046411}
+  butcherKnifeButton: {fileID: 579401209}
+  bowButton: {fileID: 1747943686}
+  skinningKnifeButton: {fileID: 1724395991}
+  fishingPoleButton: {fileID: 97633146}
+  housingDisplay: {fileID: 787251008}
+  mineStablityDisplay: {fileID: 1200616348}
+  axeDisplay: {fileID: 285340972}
+  pickaxeDisplay: {fileID: 653279366}
+  butcherDisplay: {fileID: 1109905703}
+  bowDisplay: {fileID: 1807534089}
+  skinningDisplay: {fileID: 1819352263}
+  fishingPoleDisplay: {fileID: 951986070}
+  housingCostDisplay: {fileID: 1496238717}
+  mineStabilityCostDisplay: {fileID: 926164201}
+  axeCostDisplay: {fileID: 952156823}
+  pickaseCostDisplay: {fileID: 1782976498}
+  butcherCostDisplay: {fileID: 1469525096}
+  bowCostDisplay: {fileID: 1260952178}
+  skinningKnifeCostDisplay: {fileID: 2083904571}
+  fishingPoleCostDisplay: {fileID: 723071877}
   upgradeCostMultiplier: 1.5
   housingLevel: 0
+  mineStablityLevel: 0
   axeLevel: 0
+  pickaxeLevel: 0
   butcherLevel: 0
   bowLevel: 0
   skinningLevel: 0
@@ -12145,12 +12194,12 @@ RectTransform:
   m_Children:
   - {fileID: 955509910}
   m_Father: {fileID: 926193024}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1407.2, y: 515}
-  m_SizeDelta: {x: 180, y: -1030}
+  m_AnchoredPosition: {x: 343.89, y: -505.2}
+  m_SizeDelta: {x: 212.7, y: -1010.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1524257930
 MonoBehaviour:
@@ -16128,8 +16177,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 343.92, y: 0.000011444}
-  m_SizeDelta: {x: 212.8, y: 0}
+  m_AnchoredPosition: {x: 343.92, y: 34.775}
+  m_SizeDelta: {x: 212.8, y: -69.55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1955312365
 MonoBehaviour:

@@ -194,6 +194,7 @@ public class Event_Manager_System : MonoBehaviour
     // build house
     if (upgradeManagerScript.housingLevel >= 1 && eventThree)
     {
+      eventPanel.gameObject.SetActive(true);
       eventText.text = "A stranger stumbles out of the woods with wounds all over his body. A giant beast appears behind him and with" +
         "a struggle you both bring the beast down. He like your house but says when he heals he could do it better";
       eventThree = false;
@@ -222,6 +223,7 @@ public class Event_Manager_System : MonoBehaviour
     // pop over 40
     if (workerManagerScript.totalWorkers >= 40 && eventFour)
     {
+      eventPanel.gameObject.SetActive(true);
       eventText.text = "The village has gotten big enough, to start fighting back.";
       eventFour = false;
       eventFive = true;
@@ -238,6 +240,7 @@ public class Event_Manager_System : MonoBehaviour
     // gone on 10 monster hunts
     if (mHuntCount >= 10 && eventFive)
     {
+      eventPanel.gameObject.SetActive(true);
       eventText.text = "You find what looks like a cave opening on your latest hunt. It looks full of resources. It may be mineable.";
       eventFive = false;
       eventSix = true;
@@ -250,6 +253,7 @@ public class Event_Manager_System : MonoBehaviour
     // built mine
     if (buildManagerScript.mineBuilt && eventSix)
     {
+      eventPanel.gameObject.SetActive(true);
       eventText.text = "This mine will help us advance our town and better defend ourselves from the monsters";
       eventSix = false;
       eventSeven = true;
@@ -268,6 +272,7 @@ public class Event_Manager_System : MonoBehaviour
     // on blacksmithBuild
     if (buildManagerScript.blacksmithBuilt && eventSeven)
     {
+      eventPanel.gameObject.SetActive(true);
       eventText.text = "You have the tools to build a mighy city now that will attract people scattered all around the land.";
       eventSeven = false;
 
